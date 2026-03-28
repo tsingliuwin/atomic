@@ -1,10 +1,16 @@
-// demos/greeting/atoms/atom_greet_logic.rs
+use std::env;
 
 /// Atom ID: atom_greet_logic
 /// Type: LOGIC
 /// Description: A simple greeting logic atom.
-pub fn main(name: &str) -> String {
+pub fn greet(name: &str) -> String {
     format!("Hello, {}! This is an Atomic greeting.", name)
+}
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    let name = if args.len() > 1 { &args[1] } else { "Stranger" };
+    println!("{}", greet(name));
 }
 
 #[cfg(test)]
@@ -13,6 +19,6 @@ mod tests {
 
     #[test]
     fn test_greet() {
-        assert_eq!(main("Gemini"), "Hello, Gemini! This is an Atomic greeting.");
+        assert_eq!(greet("Gemini"), "Hello, Gemini! This is an Atomic greeting.");
     }
 }
