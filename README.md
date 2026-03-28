@@ -1,4 +1,4 @@
-# ⚛️ Atomic Theory (Project EUME)
+# ⚛️ Atomic Theory
 
 > **The First AI-Native Software Engineering Manifesto: From "Handicraft" to "Biological Evolution".**
 

@@ -1,7 +1,7 @@
-# ⚛️ Atomic Theory (Project EUME) - AI-Native Engineering Context
+# ⚛️ Atomic Theory - AI-Native Engineering Context
 
 ## 📖 Project Vision: "Code as Intent"
-This repository is the birthplace of **Atomic Theory (Project EUME)**, an AI-native software engineering methodology. We treat software as a biological system where **Git Commits are Gene Sequences** and **Atoms are the Functional DNA**.
+This repository is the birthplace of **Atomic Theory**, an AI-native software engineering methodology. We treat software as a biological system where **Git Commits are Gene Sequences** and **Atoms are the Functional DNA**.
 
 > [!IMPORTANT]
 > **`ATOMIC_THEORY.md` is the Master Manifesto.** All actions MUST align with its "Five Laws." 
