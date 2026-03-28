@@ -39,6 +39,14 @@ You manage the full lifecycle without human intervention:
 - **`README.md` & `README.zh-CN.md`**: Project overview. **Mandate: Any update to the README must be applied to both English and Chinese versions to maintain perfect synchronization.**
 - **`ATOMIC_THEORY_DISCUSSION_LOG.md`**: Contextual history for logic analysis.
 
+### 📝 对话存证协议 (Discussion Archiving Protocol)
+- **Trigger**: When a significant theoretical debate, architectural decision, or "Gene Mutation" to the theory occurs.
+- **Action**:
+  1. Extract the core Q&A and insights from the current session.
+  2. Append the summary to `ATOMIC_THEORY_DISCUSSION_LOG.md` using a clear chronological format.
+  3. Commit the change using: `[Log] Update: Archive discussion about <Topic>`.
+- **Purpose**: To ensure the "Why" behind the "What" is preserved for future AI agents and human collaborators.
+
 ## 🚀 Future Goals
 - Implementation of a **Wasm-based Orchestrator ("The Host")** for cross-language execution.
 - Automated **Gene Repair Pipelines** triggered by CI/CD failures.
