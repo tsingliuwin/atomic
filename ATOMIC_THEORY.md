@@ -55,7 +55,29 @@ AI 承担原子的全生命周期管理，不再需要人工介入：
 ## 9. 原子元数据架构 (Metadata Registry Protocol)
 - **根模板 (The Root Template)**: 根目录下的 `ATOMIC_METADATA.json` 仅作为格式模板和标准定义，不记录具体业务原子。
 - **本地实现 (Local Implementation)**: 每个子项目或 Demo 目录必须维护一份自己的 `ATOMIC_METADATA.json`，用于记录该作用域内的原子。
-- **元数据字段**:
-  - `latest_commit_id`: 当前生效的基因版本。
-  - `history_commits`: 完整的演化历史哈希链。
-  - `orchestrators`: 原子的编排逻辑索引。
+
+## 10. 原子元数据规格书 (Atom Metadata Specification - AMS)
+为确保 AI 能够精准解析与执行，原子元数据必须严格遵循以下规格：
+
+### 10.1 核心身份 (Core Identity)
+- **ID 规范**: 必须以 `atom_` 开头，仅限小写字母、数字和下划线（e.g., `atom_string_parser`）。
+- **Type 分类**:
+  - `LOGIC`: 纯逻辑处理原子。
+  - `IO`: 负责数据读写（文件/网络）的原子。
+  - `MODEL`: 包含 AI 模型或推理逻辑的原子。
+  - `UI`: 负责视觉交互生成的原子。
+
+### 10.2 运行环境 (Runtime & Language)
+- **language**: 明确源语言（e.g., `rust`, `python`, `typescript`, `cpp`）。
+- **runtime**: 明确执行环境（e.g., `native`, `wasmtime`, `python3.10`, `bun`）。
+
+### 10.3 契约定义 (Contract Definitions)
+- **fn_name**: 指定该原子的入口函数名。
+- **inputs / outputs**: 
+  - 必须采用强类型声明：`Type:Name` (e.g., `String:input_text`, `JSON:config`)。
+  - 支持类型：`String`, `Number`, `Boolean`, `JSON`, `Binary`, `WasmPtr`。
+
+### 10.4 审计与溯源 (Audit & Traceability)
+- **latest_commit_id**: 必须是该原子最后一次逻辑修改的完整 Git Hash。
+- **history_commits**: 必须按时间倒序排列的 Hash 列表，记录该原子的完整进化链。
+- **description**: 必须包含原子要解决的核心任务，便于 LLM 进行语义匹配。
