@@ -1,0 +1,30 @@
+{
+  "project": "Demo Greeting (Atomic Theory)",
+  "theory_version": "1.3.0",
+  "atoms": [
+    {
+      "id": "atom_greet_logic",
+      "language": "rust",
+      "runtime": "native",
+      "path": "atoms/atom_greet_logic.rs",
+      "fn_name": "main",
+      "description": "A simple greeting logic atom written in Rust.",
+      "inputs": ["String:name"],
+      "outputs": ["String:greeting"],
+      "type": "LOGIC",
+      "latest_commit_id": "2b34e664bebd3e2a3e25a4c089f7194221719aff",
+      "history_commits": [
+        "2b34e664bebd3e2a3e25a4c089f7194221719aff",
+        "ed9471a9157dc20abda083a39d99a245d5510e78"
+      ]
+    }
+  ],
+  "orchestrators": [
+    {
+      "id": "demo_runner",
+      "language": "shell",
+      "description": "Simple orchestrator to showcase the atomic file structure.",
+      "composes": ["atom_greet_logic"]
+    }
+  ]
+}
