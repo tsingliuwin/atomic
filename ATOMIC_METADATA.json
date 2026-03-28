@@ -3,25 +3,34 @@
   "theory_version": "1.2.0",
   "atoms": [
     {
-      "id": "atom_id_template",
-      "language": "e.g., rust, python, go, wasm",
-      "runtime": "e.g., native, python3, wasmtime",
-      "path": "path/to/atom_file",
-      "fn_name": "entrypoint_function_name",
-      "description": "Short purpose of this atom.",
-      "inputs": [],
-      "outputs": [],
-      "type": "e.g., UTILITY, LOGIC, DATA_SOURCE",
-      "latest_commit_id": "current_git_hash_of_this_atom",
+      "id": "atom_example_name",
+      "language": "rust/python/typescript",
+      "runtime": "native/python3/wasmtime/node",
+      "path": "path/to/atom_file.ext",
+      "fn_name": "main/handler_function",
+      "description": "A clear description of what this atom does, helping LLMs understand when to use it.",
+      "inputs": [
+        "String:input_param_1",
+        "JSON:config_object"
+      ],
+      "outputs": [
+        "String:result_output",
+        "StdOut:log_stream"
+      ],
+      "type": "LOGIC/IO/MODEL/UI",
+      "latest_commit_id": "FULL_GIT_COMMIT_HASH",
       "history_commits": []
     }
   ],
   "orchestrators": [
     {
-      "id": "orchestrator_id",
-      "language": "e.g., rust, shell, python",
-      "description": "How this orchestrator composes atoms.",
-      "composes": ["atom_id_1", "atom_id_2"]
+      "id": "orchestrator_example",
+      "language": "shell/rust/python",
+      "description": "Explains the workflow and how it composes specific atoms.",
+      "composes": [
+        "atom_id_1",
+        "atom_id_2"
+      ]
     }
   ]
 }
