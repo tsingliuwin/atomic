@@ -1,5 +1,7 @@
 # ⚛️ Atomic Theory
 
+[简体中文](./README.zh-CN.md)
+
 > **The First AI-Native Software Engineering Manifesto: From "Handicraft" to "Biological Evolution".**
 
 ## 🌟 Vision: Code as Intent

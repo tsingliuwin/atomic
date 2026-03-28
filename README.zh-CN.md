@@ -1,5 +1,7 @@
 # ⚛️ 原子理论 (Atomic Theory)
 
+[English](./README.md)
+
 > **首个 AI Native 软件工程宣言：从“手工业”向“生物进化”的范式转型。**
 
 ## 🌟 愿景：代码即意图 (Code as Intent)
