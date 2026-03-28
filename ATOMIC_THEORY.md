@@ -64,5 +64,21 @@ AI 承担原子的全生命周期管理，实现“无人驾驶”式开发：
 - **`history_commits` (Array<Hash>)**: 按时间倒序排列的历史快照链。
 
 ## 9. 原子编排规格书 (Orchestrator Specification)
-- **`composes` (Array<ID>)**: 声明编排器所调用的原子 ID 列表。
-- **`language`**: 编排器本身的实现语言（通常为 `shell`, `rust` 或 `python`）。
+编排器（Orchestrator / The Host）是系统的“神经中枢”，负责将离散的原子串联成复杂的业务流：
+
+### 9.1 核心职责 (The Host Responsibilities)
+- **生命周期管理**: 负责原子的加载、实例化（Instantiation）与销毁。
+- **安全隔离**: 利用 Wasm 沙箱确保原子间的内存隔离，防止单个原子的 Bug 摧毁整个系统。
+- **路由与链路 (The Linker)**: 根据业务逻辑，将“原子 A 的输出”导向“原子 B 的输入”。
+- **性能调度**: 最小化异构原子间的数据传递开销，利用共享内存或高效指针传递。
+
+### 9.2 连接机制 (Connecting Mechanisms)
+- **接口定义 (WIT - Wasm Interface Type)**: 所有的异构原子必须通过标准的 IDL (如 WIT) 定义其导出函数与导入依赖，确保 AI 能够自动化生成桥接代码。
+- **内存映射**: 编排器负责在宿主环境与 Wasm 沙箱之间进行复杂对象（如 String, JSON）的内存映射与拷贝。
+
+### 9.3 编排器定义 (Registry Fields)
+- **`id` (String)**: 编排器的唯一标识。
+- **`composes` (Array<ID>)**: 声明该编排器所调用的原子 ID 列表及其依赖顺序。
+- **`language` (String)**: 编排器的实现语言。**强烈建议使用 Rust** 作为宿主语言，以获得极致的并发控制与 Wasm 运行性能。
+- **`description` (String)**: 描述该编排器实现的完整业务链路逻辑。
+
