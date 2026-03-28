@@ -1,38 +1,27 @@
 {
-  "project": "EUME (Enterprise Universal Memory Engine)",
+  "project": "Project Name (Template)",
   "theory_version": "1.2.0",
   "atoms": [
     {
-      "id": "atom_hello_rust",
-      "language": "rust",
-      "runtime": "native",
-      "path": "atoms/hello_rust.rs",
-      "fn_name": "main",
-      "description": "Atomic unit for greeting in Rust.",
+      "id": "atom_id_template",
+      "language": "e.g., rust, python, go, wasm",
+      "runtime": "e.g., native, python3, wasmtime",
+      "path": "path/to/atom_file",
+      "fn_name": "entrypoint_function_name",
+      "description": "Short purpose of this atom.",
       "inputs": [],
-      "outputs": ["StdOut: String"],
-      "type": "DEMO_ATOMS",
-      "latest_commit_id": "87b5023352cf6739d8391dcaa8c6e10b02257e24"
-    },
-    {
-      "id": "atom_hello_python",
-      "language": "python",
-      "runtime": "python3",
-      "path": "atoms/hello_python.py",
-      "fn_name": "main",
-      "description": "Atomic unit for greeting in Python.",
-      "inputs": [],
-      "outputs": ["StdOut: String"],
-      "type": "DEMO_ATOMS",
-      "latest_commit_id": "a29e749caf39b9a1d71fd63712c7f0619276f475"
+      "outputs": [],
+      "type": "e.g., UTILITY, LOGIC, DATA_SOURCE",
+      "latest_commit_id": "current_git_hash_of_this_atom",
+      "history_commits": []
     }
   ],
   "orchestrators": [
     {
-      "id": "demo_runner",
-      "language": "shell",
-      "description": "Simple orchestrator for the greeting demo.",
-      "composes": ["atom_hello_rust", "atom_hello_python"]
+      "id": "orchestrator_id",
+      "language": "e.g., rust, shell, python",
+      "description": "How this orchestrator composes atoms.",
+      "composes": ["atom_id_1", "atom_id_2"]
     }
   ]
 }
