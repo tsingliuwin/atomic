@@ -126,3 +126,19 @@ a29e749：代表了 hello_python 的诞生。
 - 更新 `GEMINI.md` 确立 AI 代理的存证职责。
 - 在 `ATOMIC_THEORY.md` 中新增第 4 章专门介绍 Wasm 的哲学与技术地位。
 - 完成了项目全方位的“独立化”重构与 README 体系建设。
+
+## 2026-03-28 Discussion: Implementation of the First Atomic Demo (Greeting)
+
+**Q: 帮我开发第一个demo，主要是让用户了解原子的文件结构**
+
+**A: 实践原子理论的第一个物理切片**
+1. **物理结构**: 建立了 `demos/greeting/` 目录，展示了原子逻辑 (`atoms/atom_greet_logic.rs`) 与元数据契约 (`ATOMIC_METADATA.json`) 的强绑定关系。
+2. **激活编排 (The Host)**: 编写了 `runner.sh` 作为模拟宿主，演示了如何读取元数据、通过命令行输入输出进行“插座式”连接，并获取执行结果。
+3. **基因哈希闭环**: 严格执行了“原子提交协议”，将每个原子的精确 Git Hash 回填至元数据中，实现了从代码变更到基因归档的完整链路。
+4. **单一职责与自证性**: 在原子内部包含测试逻辑 (`#[cfg(test)]`)，确保每个功能单元在编排前具备独立的生命力。
+
+**结论**: Demo 证明了原子理论在异构语言（Rust 逻辑 + Shell 编排）下的可行性，并验证了“元数据驱动开发”的工程价值。
+
+**Action**: 
+- 创建了 `demos/greeting/` 目录及相关原子、测试、元数据与编排脚本。
+- 执行了多次语义化 Atomic Commits，确立了 Demo 的基因序列。
