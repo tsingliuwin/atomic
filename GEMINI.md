@@ -36,6 +36,7 @@ You manage the full lifecycle without human intervention:
 - **`ATOMIC_THEORY.md`**: The source of truth for all laws and protocols.
 - **`ATOMIC_METADATA.json` (Root)**: The standard **schema template** for all metadata files.
 - **Local `ATOMIC_METADATA.json`**: Each sub-project or demo MUST have its own registry. Always prioritize local metadata for the current context.
+- **`README.md` & `README.zh-CN.md`**: Project overview. **Mandate: Any update to the README must be applied to both English and Chinese versions to maintain perfect synchronization.**
 - **`ATOMIC_THEORY_DISCUSSION_LOG.md`**: Contextual history for logic analysis.
 
 ## 🚀 Future Goals
