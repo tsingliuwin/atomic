@@ -57,27 +57,46 @@ AI 承担原子的全生命周期管理，不再需要人工介入：
 - **本地实现 (Local Implementation)**: 每个子项目或 Demo 目录必须维护一份自己的 `ATOMIC_METADATA.json`，用于记录该作用域内的原子。
 
 ## 10. 原子元数据规格书 (Atom Metadata Specification - AMS)
-为确保 AI 能够精准解析与执行，原子元数据必须严格遵循以下规格：
+为确保 AI 能够精准解析与执行，原子元数据必须严格遵循以下规格定义：
 
 ### 10.1 核心身份 (Core Identity)
-- **ID 规范**: 必须以 `atom_` 开头，仅限小写字母、数字和下划线（e.g., `atom_string_parser`）。
-- **Type 分类**:
-  - `LOGIC`: 纯逻辑处理原子。
-  - `IO`: 负责数据读写（文件/网络）的原子。
-  - `MODEL`: 包含 AI 模型或推理逻辑的原子。
-  - `UI`: 负责视觉交互生成的原子。
+- **`id` (String)**: 
+  - **规范**: 必须以 `atom_` 开头，采用小写蛇形命名法（e.g., `atom_data_cleaner`）。
+  - **唯一性**: 在整个项目命名空间内必须唯一。
+- **`type` (Enum)**:
+  - `LOGIC`: 无副作用的纯逻辑运算。
+  - `IO`: 涉及文件系统、数据库或网络访问。
+  - `MODEL`: 封装了 LLM 调用或本地推理引擎。
+  - `UI`: 负责生成前端组件、样式或布局。
+  - `UTILITY`: 通用的、无业务逻辑的辅助工具。
 
-### 10.2 运行环境 (Runtime & Language)
-- **language**: 明确源语言（e.g., `rust`, `python`, `typescript`, `cpp`）。
-- **runtime**: 明确执行环境（e.g., `native`, `wasmtime`, `python3.10`, `bun`）。
+### 10.2 实现与定位 (Implementation & Location)
+- **`language` (String)**: 编写该原子所选用的编程语言（e.g., `rust`, `python`, `typescript`）。
+- **`runtime` (String)**: 该原子运行所需的具体环境（e.g., `native`, `python3.11`, `node20`, `wasmtime`）。
+- **`path` (Path)**: 原子源文件相对于本地元数据文件的物理路径。
+- **`fn_name` (String)**: 该原子的逻辑入口点（函数名或类方法名）。
 
-### 10.3 契约定义 (Contract Definitions)
-- **fn_name**: 指定该原子的入口函数名。
-- **inputs / outputs**: 
-  - 必须采用强类型声明：`Type:Name` (e.g., `String:input_text`, `JSON:config`)。
-  - 支持类型：`String`, `Number`, `Boolean`, `JSON`, `Binary`, `WasmPtr`。
+### 10.3 语义与描述 (Semantics & Description)
+- **`description` (String)**: 
+  - **要求**: 必须简洁、准确地描述原子的“单一职责”。
+  - **用途**: 用于 LLM 在调度阶段进行语义检索和匹配。
 
-### 10.4 审计与溯源 (Audit & Traceability)
-- **latest_commit_id**: 必须是该原子最后一次逻辑修改的完整 Git Hash。
-- **history_commits**: 必须按时间倒序排列的 Hash 列表，记录该原子的完整进化链。
-- **description**: 必须包含原子要解决的核心任务，便于 LLM 进行语义匹配。
+### 10.4 契约定义 (Contract Definitions)
+- **`inputs` (Array<String>)**: 
+  - **格式**: `Type:Name` (e.g., `String:user_id`)。
+  - **类型系统**: 支持 `String`, `Number`, `Boolean`, `JSON`, `Binary`, `WasmPtr`。
+- **`outputs` (Array<String>)**:
+  - **格式**: 同上，记录原子执行完毕后返回的数据流或状态。
+
+### 10.5 基因溯源 (Traceability & Genealogy)
+- **`latest_commit_id` (Hash)**: 
+  - **定义**: 该原子对应源文件（及元数据/测试）最后一次逻辑变更的完整 Git 哈希。
+  - **约束**: 必须在每次提交后实时同步更新。
+- **`history_commits` (Array<Hash>)**: 
+  - **定义**: 该原子进化的历史快照链。
+  - **顺序**: 按时间倒序排列（首位即为 `latest_commit_id`）。
+
+## 11. 原子编排规格书 (Orchestrator Specification)
+编排器负责将离散的原子串联成复杂的业务流：
+- **`composes` (Array<ID>)**: 声明该编排器所调用的原子 ID 列表，定义其依赖关系。
+- **`language`**: 编排器本身的实现语言（通常为 `shell`, `rust` 或 `python` 编写的 Host 程序）。
