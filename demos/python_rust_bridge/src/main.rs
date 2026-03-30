@@ -2,35 +2,38 @@
 use std::process::Command;
 
 /// Orchestrator ID: rust_polyglot_host
-/// Description: A Rust-based host that orchestrates cross-language atoms.
+/// Description: A Rust-based host that orchestrates a pipeline of Python atoms.
 fn main() {
-    let input = "Atomic theory is evolving fast!";
-    println!("⚛️ [Rust Host] Starting orchestration...");
-    println!("⚛️ [Rust Host] Input Text: '{}'", input);
+    let raw_input = "  ⚛️ Atomic theory is EVOLVING fast!!!  ";
+    println!("⚛️ [Rust Host] Starting evolved orchestration pipeline...");
+    println!("⚛️ [Rust Host] Raw Input: '{}'", raw_input);
 
-    // 逻辑上这里应该从 ATOMIC_METADATA.json 动态读取，
-    // 此处直接引用以直观展示跨语言调用逻辑。
-    let atom_path = "atoms/atom_text_analyzer.py";
-
-    println!("⚛️ [Rust Host] Calling Python Atom (atom_text_analyzer)...");
-    
-    // 模拟连接协议：通过 StdIO 传递数据并获取 JSON 结果
-    let output = Command::new("python3")
-        .arg(atom_path)
-        .arg(input)
+    // 1. 调用新生的 Utility 原子进行数据清洗
+    let cleaner_path = "atoms/atom_data_cleaner.py";
+    println!("⚛️ [Rust Host] Step 1: Cleaning data via atom_data_cleaner...");
+    let clean_output = Command::new("python3")
+        .arg(cleaner_path)
+        .arg(raw_input)
         .output()
-        .expect("Failed to execute atom");
-
-    if !output.status.success() {
-        eprintln!("Error: {}", String::from_utf8_lossy(&output.stderr));
-        return;
-    }
-
-    let result_json = String::from_utf8_lossy(&output.stdout);
+        .expect("Failed to execute cleaner");
     
-    // 获取 Python 处理后的 JSON 数据并展示
-    println!("⚛️ [Rust Host] Result Mapping (Python JSON -> Rust String):");
+    let cleaned_text = String::from_utf8_lossy(&clean_output.stdout).trim().to_string();
+    println!("⚛️ [Rust Host] Cleaned Text: '{}'", cleaned_text);
+
+    // 2. 将清洗后的数据传递给 Logic 原子进行分析
+    let analyzer_path = "atoms/atom_text_analyzer.py";
+    println!("⚛️ [Rust Host] Step 2: Analyzing text via atom_text_analyzer...");
+    let analyze_output = Command::new("python3")
+        .arg(analyzer_path)
+        .arg(&cleaned_text)
+        .output()
+        .expect("Failed to execute analyzer");
+
+    let result_json = String::from_utf8_lossy(&analyze_output.stdout);
+    
+    // 3. 输出最终结果
+    println!("⚛️ [Rust Host] Final Analysis Result (JSON):");
     println!("   > {}", result_json.trim());
     
-    println!("⚛️ [Rust Host] Orchestration Task Complete.");
+    println!("⚛️ [Rust Host] Orchestration Pipeline Complete.");
 }

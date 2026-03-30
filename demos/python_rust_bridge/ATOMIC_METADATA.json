@@ -14,14 +14,27 @@
       "type": "LOGIC",
       "latest_commit_id": "fd7e7a094e5ff5b0f9823cf5e881d6314cd8bdab",
       "history_commits": ["fd7e7a094e5ff5b0f9823cf5e881d6314cd8bdab"]
+    },
+    {
+      "id": "atom_data_cleaner",
+      "language": "python",
+      "runtime": "python3",
+      "path": "atoms/atom_data_cleaner.py",
+      "fn_name": "clean",
+      "description": "Utility atom to sanitize raw text for downstream analysis.",
+      "inputs": ["String:text"],
+      "outputs": ["String:cleaned_text"],
+      "type": "UTILITY",
+      "latest_commit_id": "de695808b170874a9467d63856dd5d611daa55d8",
+      "history_commits": ["de695808b170874a9467d63856dd5d611daa55d8"]
     }
   ],
   "orchestrators": [
     {
       "id": "rust_polyglot_host",
       "language": "rust",
-      "description": "High-performance Rust host that orchestrates Python atoms.",
-      "composes": ["atom_text_analyzer"]
+      "description": "High-performance Rust host that orchestrates multiple Python atoms into a pipeline.",
+      "composes": ["atom_data_cleaner", "atom_text_analyzer"]
     }
   ]
 }
