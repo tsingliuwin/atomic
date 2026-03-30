@@ -209,3 +209,18 @@ a29e749：代表了 hello_python 的诞生。
 **Action**: 
 - 更新 `ATOMIC_THEORY.md`，确立 2.0 演进准则。
 - 更新 `GEMINI.md`，确立自主对话存证协议 (ADA)。
+
+## 2026-03-28 Discussion: Implementation of Metadata Automation (Doc-as-Contract)
+
+**Q: 元数据自动化**
+
+**A: 原子理论 2.0 的核心工具落地**
+1. **自反性进化**: 系统生长出了 `atom_metadata_extractor`，能够解析源代码中的 `@atomic` 标记，实现了元数据的自动提取。
+2. **Doc-as-Contract**: 验证了通过注释定义 AMS 规格的实战可行性，极大地降低了人类与 AI 的协作摩擦。
+3. **自动化闭环**: 奠定了未来“原子提交 -> 自动扫描 -> 元数据同步”的无人值守工作流基础。
+
+**结论**: 元数据自动化标志着原子理论在工程效率上的质变，使系统更接近于一个能够自我感知的代码生物体。
+
+**Action**: 
+- 开发并提交了 `atom_metadata_extractor.py`。
+- 完成了元数据规格在注释中的标准化定义与实装。
